@@ -17,7 +17,6 @@
                     <table class="table table-bordered" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>ID</th>
                                 <th>Libellé</th>
                                 <th>Route</th>
                                 <th>Icône</th>
@@ -27,7 +26,7 @@
                         <tbody>
                             @forelse ($menus as $menu)
                                 <tr>
-                                    <td>{{ $menu->Idmen }}</td>
+
                                     <td>{{ $menu->libelle }}</td>
                                     <td>{{ $menu->route }}</td>
                                     <td><i class="{{ $menu->icon }}"></i></td>

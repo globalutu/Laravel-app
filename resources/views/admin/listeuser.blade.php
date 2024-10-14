@@ -14,7 +14,7 @@
                     <table class="table table-bordered" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>ID</th>
+
                                 <th>Nom</th>
                                 <th>Prénoms</th>
                                 <th>Email</th>
@@ -25,7 +25,7 @@
                         <tbody>
                             @forelse ($user as $lister)
                                 <tr>
-                                    <td>{{ $lister->Iduse }}</td>
+
                                     <td>{{ $lister->nom }}</td>
                                     <td>{{ $lister->prenoms }}</td>
                                     <td>{{ $lister->email }}</td>
