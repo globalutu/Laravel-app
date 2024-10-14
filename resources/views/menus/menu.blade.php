@@ -37,16 +37,7 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        @if (count(session('assignedMenus')) != 0)
 
-                            @forelse(session('assignedMenus') as $menuuse)
-                                <a class="collapse-item" href="{{ route($menuuse->route) }}">
-                                    <i class="{{ $menuuse->icon }}"></i> {{ $menuuse->libelle }}
-                                </a>
-                            @empty
-                                <p>Aucun menu assigné pour cet utilisateur.</p>
-                            @endforelse
-                        @endif
                     </div>
                 </div>
 
@@ -68,19 +59,18 @@
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="dropdown-item" href="#">
-                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Profile
-                        </a>
-                        <a class="collapse-item" href="forgot-password.html">
-                            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Modifier le mot de passe
-                        </a>
-                        <a class="collapse-item" href="{{ route('decnt') }}">
-                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Déconnexion
-                        </a>
+                        <h6 class="collapse-header">Espace Admin:</h6>
+                        @if (count(session('assignedMenus')) != 0)
+
+                            @forelse(session('assignedMenus') as $menuuse)
+                                <a class="collapse-item" href="{{ route($menuuse->route) }}">
+                                    <i class="{{ $menuuse->icon }}"></i> {{ $menuuse->libelle }}
+                                </a>
+                            @empty
+                                <p>Aucun menu assigné pour cet utilisateur.</p>
+                            @endforelse
+                        @endif
+
                     </div>
                 </div>
             </li>
