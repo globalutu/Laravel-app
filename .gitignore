@@ -1,0 +1,29 @@
+# Laravel folder exclusions
+/vendor
+/node_modules
+/public/storage
+/storage/*.key
+/storage/*.log
+/storage/framework/cache/data
+/storage/framework/sessions
+/storage/framework/views
+/storage/logs
+/bootstrap/cache
+
+# Ignore environment and configuration files
+.env
+.env.backup
+.env.production
+.env.testing
+
+# Ignore IDE-specific files
+/.vscode
+/.idea
+
+# Ignore OS-generated files
+.DS_Store
+Thumbs.db
+
+# Ignore Composer and NPM lock files (optional)
+# composer.lock
+# package-lock.json
