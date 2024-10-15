@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Utilisateur;
 use App\Models\Menu;
+use App\Models\Role;
 use App\Models\accord_menu;
 use Illuminate\Routing\Controller as BaseController;
 
@@ -66,8 +67,9 @@ class LoginControllers extends BaseController
     public function listeuserview()
     {
         $user = Utilisateur::all();
+        $roles = Role::all();
 
-        return view('admin.listeuser', compact('user'));
+        return view('admin.listeuser', compact('user', 'roles'));
     }
 
     // Méthode pour afficher la liste des menus

@@ -1,0 +1,15 @@
+# Gérer automatiquement les fins de ligne pour tous les fichiers texte
+* text=auto
+
+# Forcer LF pour certains types de fichiers
+*.php text eol=lf
+*.js text eol=lf
+*.blade.php text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+.editorconfig text eol=lf
+
+# Forcer LF pour des fichiers spécifiques
+artisan text eol=lf

@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Utilisateur extends Authenticatable // Modifiez cette ligne
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
+    use Notifiable;
 
-    protected $table = 'utilisateurs'; 
-    protected $primaryKey = 'Iduse'; 
+    protected $table = 'utilisateurs';
+    protected $primaryKey = 'Iduse';
     protected $fillable = [
         'nom',
         'prenoms',
@@ -19,8 +20,6 @@ class Utilisateur extends Authenticatable // Modifiez cette ligne
         'role',
         'mtp',
     ];
-
-    
 
     // Méthode pour définir le mot de passe
     public function getAuthPassword()

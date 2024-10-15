@@ -18,20 +18,20 @@ class Accord_menusControllers extends BaseController
 
         // Trouver l'utilisateur en fonction de l'ID
         $accord = Utilisateur::where('Iduse', $request->id)->first();
-
+        $roles = Role::all();
         // Si l'utilisateur existe, récupérer les menus assignés
         $menusassiger = accord_menu::where('Iduse', $request->id)->pluck('Idmen')->toArray();
         $assignedMenus = Menu::whereIn('Idmen', $menusassiger)->get();
 
         // Passer les variables à la vue
-        return view('admin.accordmenu', compact('accord', 'menus', 'assignedMenus'));
+        return view('admin.accordmenu', compact('accord', 'menus', 'assignedMenus', 'roles'));
     }
 
     public function saveaccord(Request $request)
     {
         // Valider les données reçues
         $validatedData = $request->validate([
-        'user_id' => 'required|exists:Utilisateurs,Iduse', // Assurez-vous que l'utilisateur existe
+        'user_id' => 'required|exists:Utilisateurs,Iduse',
         'menu' => 'required|exists:Menus,Idmen', // Assurez-vous que le menu existe
     ]);
 

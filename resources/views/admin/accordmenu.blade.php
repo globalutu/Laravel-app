@@ -1,26 +1,25 @@
 @extends('tmplt.template')
-@section('content') 
+@section('content')
 
     <div class="row">
-        {{--  <!-- Colonne 1: Informations de la personne et sélection d\'options -->  --}}
         <div class="col-lg-6">
-            {{--  <!-- Carte d\'informations -->  --}}
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Informations de l\'utilisateur</h6>
                 </div>
                 <div class="card-body">
-                    <!-- Affichage des informations personnelles -->
                     <h5 class="card-title">Nom: <span class="text-dark">{{ $accord->nom ?? 'Nom non disponible' }}</span></h5>
-                    <p class="card-subtitle mb-2 text-muted">Rôle: <span class="text-dark">{{ $accord->role ?? 'Rôle non disponible' }}</span></p>
+                    <p class="card-subtitle mb-2 text-muted">Rôle: <span class="text-dark">
+                            @php
+                                $role = $roles->firstWhere('Idrol', $accord->role);
+                            @endphp
 
-                    <!-- Formulaire de sélection -->
+                            {{ $role ? $role->libelrol : 'Rôle non disponible' }}</span></p>
+
                     <form method="POST" action="{{ route('accord.post') }}">
                         @csrf
-                        <!-- Champ caché pour l'ID de l'utilisateur -->
                         <input type="hidden" name="user_id" value="{{ $accord->Iduse }}">
 
-                        <!-- Sélection du menu -->
                         <div class="form-group">
                             <label for="menu">Sélectionner le menu</label>
                             <select name="menu" class="form-control" id="menu" required>
@@ -70,7 +69,7 @@
             </div>
         </div>
     </div>
-</div>
+    </div>
 
 @endsection
 

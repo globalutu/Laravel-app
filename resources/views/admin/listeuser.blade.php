@@ -29,7 +29,13 @@
                                     <td>{{ $lister->nom }}</td>
                                     <td>{{ $lister->prenoms }}</td>
                                     <td>{{ $lister->email }}</td>
-                                    <td>{{ $lister->role }}</td>
+                                    <td> @php
+                                        $role = $roles->firstWhere('Idrol', $lister->role);
+                                    @endphp
+
+                                        {{ $role ? $role->libelrol : 'Rôle non défini' }}
+                                    </td>
+                                    </td>
                                     <td>
                                         <!-- Bouton Modifier -->
                                         <a href="{{ route('userEdit', ['id' => $lister->Iduse]) }}"
