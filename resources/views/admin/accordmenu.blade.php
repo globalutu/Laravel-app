@@ -72,7 +72,7 @@
     </div>
 
 @endsection
-
+@include('menus.back')
 <!-- SweetAlert2 pour les messages de succès ou d'erreur -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
