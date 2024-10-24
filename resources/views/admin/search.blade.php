@@ -22,7 +22,10 @@
                                         <strong>Email:</strong> {{ $result->email }} <br>
                                         <strong>Role:</strong> {{ $result->role }} <br>
                                     </p>
-                                    <a href="" class="btn btn-warning">Modifier</a>
+                                    <button data-target="#addmodifyBtn" data-toggle="modal"
+                                        class="btn btn-info btn-circle btn-sm" title="Modifier">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
 
                                     <button class="btn btn-danger btn-circle btn-sm delete-button" title="Supprimer"
                                         data-user-id="{{ $result->id }}" data-user-name="{{ $result->nom }}">

@@ -36,13 +36,13 @@
                                             onclick="updatemenu('{{ $menu->Idmen }}','{{ $menu->libelle }}','{{ $menu->route }}','{{ $menu->icon }}')"
                                             class="btn btn-info btn-circle btn-sm" title="Modifier">
                                             <i class="fas fa-edit"></i>
-                                            </a>
+                                        </button>
 
-                                            <!-- Bouton pour ouvrir le modal de suppression -->
-                                            <button class="btn btn-danger btn-circle btn-sm delete-button" title="Supprimer"
-                                                data-user-id="{{ $menu->Idmen }}" data-user-name="{{ $menu->libelle }}">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
+                                        <!-- Bouton pour ouvrir le modal de suppression -->
+                                        <button class="btn btn-danger btn-circle btn-sm delete-button" title="Supprimer"
+                                            data-user-id="{{ $menu->Idmen }}" data-user-name="{{ $menu->libelle }}">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
                                     </td>
                                 </tr>
                             @empty
