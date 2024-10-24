@@ -52,10 +52,6 @@ class LoginControllers extends BaseController
     }
 
     // Méthode pour afficher la page d'ajout de rôle
-    public function roleview()
-    {
-        return view('admin.addrole');
-    }
 
     // Méthode pour afficher la page d'ajout de menu
     public function menuview()
@@ -95,17 +91,18 @@ class LoginControllers extends BaseController
             Session::put('utilisateurs', $user);
 
             Session::put('role', $user->role);
-            $id = session('utilisateurs')->Iduse;
-            $menusassiger = accord_menu::where('Iduse', $id)->pluck('Idmen')->toArray();
-            $assignedMenus = Menu::whereIn('Idmen', $menusassiger)->get([
-            'libelle',
-            'route',
-        ]);
 
+            $menusAssigner = accord_menu::where('Idrol', $user->role)
+                                    ->pluck('Idmen')->toArray();
+
+            $assignedMenus = Menu::whereIn('Idmen', $menusAssigner)->get(['libelle', 'route', 'icon']);
+
+            // Stocker les menus assignés dans la session
             Session::put('assignedMenus', $assignedMenus);
 
             return redirect()->route('admin.dashboard');
         } else {
+            // Retourner un message d'erreur si les informations d'identification sont incorrectes
             return back()->withErrors(['email' => 'Les informations d\'identification sont incorrectes.']);
         }
     }

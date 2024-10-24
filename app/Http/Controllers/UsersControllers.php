@@ -53,4 +53,24 @@ class UsersControllers extends BaseController
 
         return response()->json(['success' => false, 'error' => 'Utilisateur introuvable.']);
     }
+
+    public function valideupdate(Request $request)
+    {
+        // dd($request->Iduse);
+        $user = Utilisateur::where('Iduse', $request->id)->first();
+
+        if ($user) {
+            $user->update([
+            'nom' => $request->nom,
+                    'prenoms' => $request->prenoms,
+                    'role' => $request->role,
+                    'email' => $request->email,
+             ]);
+            $message = 'Utilisateur mis à jour avec succès.';
+        } else {
+            $message = 'Utilisateur n\'existe pas .';
+        }
+
+        return $message;
+    }
 }

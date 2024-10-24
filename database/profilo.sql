@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 14 oct. 2024 à 16:18
+-- Généré le : jeu. 24 oct. 2024 à 17:31
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 7.4.33
 
@@ -28,29 +28,30 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `accord_menus` (
-  `id` int(11) NOT NULL,
-  `Iduse` int(11) NOT NULL,
+  `Id` int(11) NOT NULL,
+  `Idrol` int(11) NOT NULL,
   `Idmen` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `accord_menus`
 --
 
-INSERT INTO `accord_menus` (`id`, `Iduse`, `Idmen`, `created_at`, `updated_at`) VALUES
-(7, 3, 5, '2024-10-06 19:35:30', '2024-10-06 19:35:30'),
-(8, 3, 8, '2024-10-07 06:53:40', '2024-10-07 06:53:40'),
-(10, 2, 8, '2024-10-07 14:25:19', '2024-10-07 14:25:19'),
-(13, 3, 26, '2024-10-10 05:21:13', '2024-10-10 05:21:13'),
-(14, 3, 27, '2024-10-10 08:29:12', '2024-10-10 08:29:12'),
-(16, 3, 4, '2024-10-10 09:50:08', '2024-10-10 09:50:08'),
-(17, 11, 4, '2024-10-10 11:54:56', '2024-10-10 11:54:56'),
-(18, 11, 27, '2024-10-10 11:55:02', '2024-10-10 11:55:02'),
-(19, 10, 4, '2024-10-10 11:56:42', '2024-10-10 11:56:42'),
-(20, 10, 27, '2024-10-10 11:56:59', '2024-10-10 11:56:59'),
-(21, 10, 5, '2024-10-10 11:57:14', '2024-10-10 11:57:14');
+INSERT INTO `accord_menus` (`Id`, `Idrol`, `Idmen`, `created_at`, `updated_at`) VALUES
+(1, 4, 5, '2024-10-24 13:08:55', '2024-10-24 13:08:55'),
+(2, 1, 5, '2024-10-24 13:10:12', '2024-10-24 13:10:12'),
+(3, 1, 27, '2024-10-24 13:10:20', '2024-10-24 13:10:20'),
+(4, 1, 4, '2024-10-24 13:10:28', '2024-10-24 13:10:28'),
+(5, 1, 28, '2024-10-24 13:10:37', '2024-10-24 13:10:37'),
+(6, 4, 28, '2024-10-24 13:11:01', '2024-10-24 13:11:01'),
+(7, 4, 4, '2024-10-24 13:11:11', '2024-10-24 13:11:11'),
+(8, 4, 27, '2024-10-24 13:27:34', '2024-10-24 13:27:34'),
+(9, 3, 4, '2024-10-24 13:27:57', '2024-10-24 13:27:57'),
+(10, 3, 27, '2024-10-24 13:28:16', '2024-10-24 13:28:16'),
+(11, 2, 4, '2024-10-24 13:28:58', '2024-10-24 13:28:58'),
+(12, 2, 27, '2024-10-24 13:29:16', '2024-10-24 13:29:16');
 
 -- --------------------------------------------------------
 
@@ -112,11 +113,12 @@ CREATE TABLE `menus` (
 --
 
 INSERT INTO `menus` (`Idmen`, `libelle`, `route`, `icon`, `created_at`, `updated_at`) VALUES
-(4, 'Liste des Utilisateurs', 'liste.user', 'bi bi-collection', '2024-10-02 17:07:16', '2024-10-02 17:07:16'),
+(4, 'Liste des Utilisateurs', 'liste.user', 'bi bi-collection', '2024-10-02 17:07:16', '2024-10-22 10:24:23'),
 (5, 'Ajout d\'Utilisateur', 'useradd', 'bi bi-cloud-sun-fill', '2024-10-02 17:09:40', '2024-10-02 17:09:40'),
 (8, 'Ajout de Rôle', 'role.get', 'bi bi-collection-fill', '2024-10-02 17:19:35', '2024-10-02 17:19:35'),
 (26, 'Ajout de Menu', 'menu.get', 'f', '2024-10-09 17:33:19', '2024-10-09 17:33:19'),
-(27, 'Liste des Menu', 'liste.menus', 'c', '2024-10-09 17:54:18', '2024-10-09 17:54:18');
+(27, 'Liste des Menu', 'liste.menus', 'c', '2024-10-09 17:54:18', '2024-10-09 17:54:18'),
+(28, 'Liste des rôles', 'role.get', 'd', '2024-10-21 15:51:33', '2024-10-23 07:58:04');
 
 -- --------------------------------------------------------
 
@@ -196,7 +198,7 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`Idrol`, `libelrol`, `codrol`, `created_at`, `updated_at`) VALUES
-(1, 'Gerant', 'GR', '2024-10-02 11:25:47', '2024-10-02 11:25:47'),
+(1, 'Gerant', 'GR', '2024-10-02 11:25:47', '2024-10-23 05:20:57'),
 (2, 'Admin', 'AD', '2024-10-02 11:28:24', '2024-10-02 11:28:24'),
 (3, 'Utilisateur', 'UT', '2024-10-02 11:28:42', '2024-10-02 11:28:42'),
 (4, 'Super_Admin', 'SA', '2024-10-09 17:00:23', '2024-10-09 17:00:23');
@@ -240,12 +242,11 @@ CREATE TABLE `utilisateurs` (
 --
 
 INSERT INTO `utilisateurs` (`Iduse`, `nom`, `prenoms`, `email`, `role`, `mtp`, `created_at`, `updated_at`) VALUES
-(2, 'Hilaire', 'Sevn', 'kanths41@gmail.com', '3', '$2y$10$jvdsinPGFg3P7HUhzfejb.3Ih681mVKl7AjXtwRLQd9tYzSxld/vO', '2024-10-02 16:16:53', '2024-10-10 07:22:45'),
+(2, 'Hilaires', 'Sevns', 'h@gmail.com', '2', '$2y$10$jvdsinPGFg3P7HUhzfejb.3Ih681mVKl7AjXtwRLQd9tYzSxld/vO', '2024-10-02 16:16:53', '2024-10-21 15:23:53'),
 (3, 'Hilaire', 'Sevn', 'hilairesevn7@gmail.com', '4', '$2y$10$qA8/LKGpPlhuFsCjIedgS.Vx2Ec0AyQlttl5QOuse2ZzLIpTFQRzq', '2024-10-02 17:03:14', '2024-10-11 17:19:19'),
-(9, 'Fiacre', 'Derold', 'hilaire4@gmail.com', '3', '$2y$10$DKS9aVVFV.EgwhumotSI1OXsQ3EQKIOhmm9XxZVjJZr3PqdzwvnY.', NULL, NULL),
 (10, 'Boukari', 'mouath', 'Mouath@gmail.com', '2', '$2y$10$AcU7xnxl6zAZ3COjhkDHheFeGHRhJZ0o3UtzpJHmoLtEYR6CzsxS6', '2024-10-10 13:53:07', '2024-10-10 13:54:21'),
 (11, 'Victor', 'Warren', 'warren@gmail.com', '1', '$2y$10$5So0wXsppOuwUglWDW.UB.vOEngHt3vzkhUNaqvyG8a7QPyL39ePC', '2024-10-10 13:53:57', '2024-10-10 13:53:57'),
-(12, '-', 't', 'hilairesevn@gmail.com', '3', '$2y$10$jJGzcoOutRwAwYYTnRFKLusLYBOXbIqjkM2vNy6ANdtg3tHz9KAvO', NULL, NULL);
+(13, 'HONORE', 'David', 'kans@gmail.com', '3', '$2y$10$qUbsckFcA1TbMW6JFFyVL.sntCUhyOcrI4AH7WAvXOPENhhkGSq3G', '2024-10-19 16:38:25', '2024-10-19 16:39:59');
 
 --
 -- Index pour les tables déchargées
@@ -255,8 +256,8 @@ INSERT INTO `utilisateurs` (`Iduse`, `nom`, `prenoms`, `email`, `role`, `mtp`, `
 -- Index pour la table `accord_menus`
 --
 ALTER TABLE `accord_menus`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `Iduse` (`Iduse`),
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `Idrol` (`Idrol`),
   ADD KEY `Idmen` (`Idmen`);
 
 --
@@ -325,7 +326,7 @@ ALTER TABLE `utilisateurs`
 -- AUTO_INCREMENT pour la table `accord_menus`
 --
 ALTER TABLE `accord_menus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT pour la table `client`
@@ -343,7 +344,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT pour la table `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `Idmen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `Idmen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT pour la table `migrations`
@@ -373,7 +374,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `utilisateurs`
 --
 ALTER TABLE `utilisateurs`
-  MODIFY `Iduse` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `Iduse` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Contraintes pour les tables déchargées
@@ -383,7 +384,7 @@ ALTER TABLE `utilisateurs`
 -- Contraintes pour la table `accord_menus`
 --
 ALTER TABLE `accord_menus`
-  ADD CONSTRAINT `accord_menus_ibfk_1` FOREIGN KEY (`Iduse`) REFERENCES `utilisateurs` (`Iduse`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `accord_menus_ibfk_1` FOREIGN KEY (`Idrol`) REFERENCES `roles` (`Idrol`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `accord_menus_ibfk_2` FOREIGN KEY (`Idmen`) REFERENCES `menus` (`Idmen`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 

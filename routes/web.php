@@ -32,7 +32,7 @@ Route::GET('/viewaddmtp', 'App\Http\Controllers\LoginControllers@forgotview')->n
 
 Route::GET('/adminview', 'App\Http\Controllers\LoginControllers@adminview')->name('admin.dashboard');
 Route::GET('/Creatermenu', 'App\Http\Controllers\LoginControllers@menuview')->name('menu.get');
-Route::GET('/createrroles', 'App\Http\Controllers\LoginControllers@roleview')->name('role.get');
+Route::GET('/listeroles', 'App\Http\Controllers\RolesControllers@roleview')->name('role.get');
 Route::GET('/ltuserview', 'App\Http\Controllers\LoginControllers@listeuserview')->name('liste.user');
 Route::GET('/ltstoreview', 'App\Http\Controllers\LoginControllers@listemenuview')->name('liste.menus');
 Route::GET('/viewadduser', 'App\Http\Controllers\LoginControllers@registerview')->name('user.get');
@@ -48,6 +48,9 @@ Route::GET('/MenuEdit{id}', 'App\Http\Controllers\MenusControllers@Modifier')->n
 Route::GET('/deltMenu{id}', 'App\Http\Controllers\MenusControllers@deltMenu')->name('deltmenu');
 Route::POST('/menusaccordsave', 'App\Http\Controllers\Accord_menusControllers@saveAccord')->name('menus.accord.save');
 Route::PUT('/utilisateurs/{id}', 'App\Http\Controllers\Accord_menusControllers@update')->name('users.update');
+Route::Post('/updateutilisateurs', 'App\Http\Controllers\UsersControllers@valideupdate')->name('valideupdate');
+Route::Post('/updatemenu', 'App\Http\Controllers\MenusControllers@valideupdatemenu')->name('valideupdatemenu');
+Route::Post('/updaterole', 'App\Http\Controllers\RolesControllers@valideUpdateRole')->name('valideupdaterole');
 Route::PUT('/MenuModifier/{id}', 'App\Http\Controllers\MenusControllers@updatemenus')->name('menus.update');
 Route::GET('/menu', 'App\Http\Controllers\MenusControllers@menu')->name('menu');
 Route::GET('/search', 'App\Http\Controllers\LoginControllers@search')->name('search');

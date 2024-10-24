@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Models\Utilisateur;
 use App\Models\Menu;
 use App\Models\accord_menu;
@@ -17,10 +18,10 @@ class Accord_menusControllers extends BaseController
         $menus = Menu::all();
 
         // Trouver l'utilisateur en fonction de l'ID
-        $accord = Utilisateur::where('Iduse', $request->id)->first();
+        $accord = Role::where('Idrol', $request->id)->first();
         $roles = Role::all();
         // Si l'utilisateur existe, récupérer les menus assignés
-        $menusassiger = accord_menu::where('Iduse', $request->id)->pluck('Idmen')->toArray();
+        $menusassiger = accord_menu::where('Idrol', $request->id)->pluck('Idmen')->toArray();
         $assignedMenus = Menu::whereIn('Idmen', $menusassiger)->get();
 
         // Passer les variables à la vue
@@ -31,31 +32,34 @@ class Accord_menusControllers extends BaseController
     {
         // Valider les données reçues
         $validatedData = $request->validate([
-        'user_id' => 'required|exists:Utilisateurs,Iduse',
+        'user_id' => 'required|exists:roles,Idrol',
         'menu' => 'required|exists:Menus,Idmen', // Assurez-vous que le menu existe
     ]);
 
         try {
             // Vérifier si l'association entre l'utilisateur et le menu existe déjà
-            $existingAccord = accord_menu::where('Iduse', $validatedData['user_id'])
-                                     ->where('Idmen', $validatedData['menu'])
-                                     ->first();
+            $existingAccord = accord_menu::where('Idrol', $validatedData['user_id'])
+                                    ->where('Idmen', $validatedData['menu'])
+                                    ->first();
 
+            // Si l'utilisateur essaie de modifier sans changer le menu
             if ($existingAccord) {
-                // Retourner un message d'erreur si le menu est déjà assigné
                 return redirect()->back()->with('error', 'Ce menu est déjà assigné à cet utilisateur.');
             }
 
             // Créer un nouvel enregistrement si l'association n'existe pas
             $accord = new accord_menu();
-            $accord->Iduse = $validatedData['user_id'];  // ID de l'utilisateur
+            $accord->Idrol = $validatedData['user_id'];  // ID de l'utilisateur
         $accord->Idmen = $validatedData['menu'];     // ID du menu
         $accord->save();
 
             // Retourner un message de succès
             return redirect()->back()->with('success', 'Menu assigné avec succès à l\'utilisateur.');
         } catch (\Exception $e) {
-            // En cas d'erreur, retourner un message d'erreur
+            // Log de l'erreur pour plus d'informations
+            \Log::error('Erreur lors de l\'assignation du menu : '.$e->getMessage());
+
+            // Retourner un message d'erreur
             return redirect()->back()->with('error', 'Une erreur est survenue lors de l\'enregistrement.');
         }
     }

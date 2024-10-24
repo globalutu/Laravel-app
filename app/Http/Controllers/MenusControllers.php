@@ -19,8 +19,8 @@ class MenusControllers extends BaseController
             return redirect()->route('login')->withErrors(['error' => 'Vous devez être connecté pour accéder à cette page.']);
         }
 
-        Session::put('utilisateurs', $menu);
-        $id = session('utilisateurs')->Iduse;
+        Session::put('Menus', $menu);
+        $id = session('Menus')->Iduse;
         $menusassiger = accord_menu::where('Iduse', $id)->pluck('Idmen')->toArray();
         $assignedMenus = Menu::whereIn('Idmen', $menusassiger)->get([
             'libelle',
@@ -103,5 +103,24 @@ class MenusControllers extends BaseController
 
         // Redirecting to the 'menuEdit' route with the correct 'id'
         return redirect()->route('menuEdit', ['id' => $id])->with('success', 'Menu mis à jour avec succès.');
+    }
+
+    public function valideupdatemenu(Request $request)
+    {
+        // dd($request->Iduse);
+        $menu = Menu::where('Idmen', $request->id)->first();
+
+        if ($menu) {
+            $menu->update([
+            'libelle' => $request->libelle,
+                    'route' => $request->route,
+                    'icon' => $request->icon,
+             ]);
+            $message = 'Menu mis à jour avec succès.';
+        } else {
+            $message = 'Menu n\'existe pas .';
+        }
+
+        return $message;
     }
 }
